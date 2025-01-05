@@ -12,9 +12,9 @@ var isGrounded = place_meeting(x, y + 1, spike_zone);
 
 var move = (right - left) * player_speed;
 
-//collison check
+	//collison check
 
-if place_meeting(x + move, y, spike_zone){
+if place_meeting(x + move, y, spike_zone) {
 	while !place_meeting(x + sign(move), y, spike_zone){
 		x += sign(move)	
 	}
@@ -23,7 +23,6 @@ if place_meeting(x + move, y, spike_zone){
 
 //commit to move
 x += move;
-
 
 //Vertical Movement
 
@@ -62,3 +61,23 @@ if canJump > 0 and keyJump { // normal jump
 
 
 y += vspd; //commit to move
+
+//Dash Ability
+if (keyboard_check(vk_shift) && !isDashing) {
+
+    isDashing = true;
+
+    alarm[0] = dashDuration;
+
+}
+
+
+
+if (isDashing) {
+
+    var dashDirection = (right - left) * dashSpeed;
+
+    x += dashDirection;
+
+}
+
