@@ -1,9 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"spike_zone",
+  "%Name":"obj_wall",
   "eventList":[],
   "managed":true,
-  "name":"spike_zone",
+  "name":"obj_wall",
   "overriddenProperties":[],
   "parent":{
     "name":"environment",
@@ -27,7 +27,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":true,
-  "spriteId":null,
+  "spriteId":{
+    "name":"wallcollision_sprite",
+    "path":"sprites/wallcollision_sprite/wallcollision_sprite.yy",
+  },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }
