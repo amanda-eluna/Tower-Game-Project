@@ -4,7 +4,8 @@
 var right = keyboard_check(ord("D"));
 var left = keyboard_check(ord("A"));
 var keyJump = keyboard_check_pressed(vk_space);
-var isGrounded = place_meeting(x, y + 1, spike_zone);
+var isGrounded = place_meeting(x, y + 1, obj_wall);
+
 
 //Horizontal Movement
 
@@ -14,8 +15,8 @@ var move = (right - left) * player_speed;
 
 	//collison check
 
-if place_meeting(x + move, y, spike_zone) {
-	while !place_meeting(x + sign(move), y, spike_zone){
+if place_meeting(x + move, y, obj_wall) {
+	while !place_meeting(x + sign(move), y, obj_wall){
 		x += sign(move)	
 	}
 	move = 0;
@@ -30,8 +31,8 @@ vspd += grv; //gravity
 
 //collison check
 
-if place_meeting(x, y + vspd, spike_zone) {
-	while !place_meeting(x, y + sign(vspd), spike_zone){
+if place_meeting(x, y + vspd, obj_wall) {
+	while !place_meeting(x, y + sign(vspd), obj_wall){
 		y += sign(vspd);	
 	}
 	
@@ -74,10 +75,14 @@ if (keyboard_check(vk_shift) && !isDashing) {
 
 
 if (isDashing) {
-
-    var dashDirection = (right - left) * dashSpeed;
-
-    x += dashDirection;
+	// Check for wall collision before moving
+	if (!place_meeting(x + move, y, obj_wall)) {
+    
+		var dashDirection = (right - left) * dashSpeed;
+		x += dashDirection; //Move the player
+	} else {
+		isDashing = false; //Stop dashing if hitting a wall
+	}
 
 }
 
