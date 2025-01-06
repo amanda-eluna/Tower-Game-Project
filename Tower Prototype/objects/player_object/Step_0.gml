@@ -13,7 +13,7 @@ var isGrounded = place_meeting(x, y + 1, obj_wall);
 
 var move = (right - left) * player_speed;
 
-	//collison check
+//collison check
 
 if place_meeting(x + move, y, obj_wall) {
 	while !place_meeting(x + sign(move), y, obj_wall){
@@ -86,3 +86,21 @@ if (isDashing) {
 
 }
 
+//attack
+if (keyboard_check_pressed(ord("R"))) {
+	if (is_swinging == false) {
+		is_swinging = true;
+		weapon.image_index = 0;
+		weapon. sprite_index = sword_attack_sprite;
+		
+		// hitbox
+		alarm_set(1, 3);
+	}
+}
+
+if (is_swinging) {
+	if (round(weapon.image_index) + 2 >= weapon.image_number) {
+		weapon.sprite_index = sword_sprite;
+		is_swinging = false;
+	}
+}
